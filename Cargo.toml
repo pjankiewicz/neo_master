@@ -1,0 +1,51 @@
+[package]
+name = "neothesia"
+version = "0.0.8"
+authors = ["Poly <marynczak.bartlomiej@gmail.com>"]
+edition = "2018"
+
+[features]
+default = ["compile_shader", "synth"]
+compile_shader = []
+record=["mpeg_encoder"]
+play_along=[]
+synth=["cpal","fluidlite","fluidlite-lib"]
+
+[dependencies]
+bytemuck = "1.5.0"
+futures = "0.3.12"
+
+# winit = "0.24.0"
+winit = { git = "https://github.com/PolyMeilex/winit.git" } 
+
+wgpu = "0.7.0"
+wgpu_glyph = "0.11.0"
+
+
+log = "0.4.14"
+env_logger = "0.8.2"
+
+nfd2 = "0.2.3"
+
+lib_midi = {path="./lib_midi"}
+midir = "0.7.0"
+
+iced_native = {git="https://github.com/hecrj/iced.git", rev="842d54732bce8f9c8b070d9bed9809b70ed728a7"} 
+iced_wgpu = {git="https://github.com/hecrj/iced.git", rev="842d54732bce8f9c8b070d9bed9809b70ed728a7", features = ["png"]} 
+iced_graphics = {git="https://github.com/hecrj/iced.git", rev="842d54732bce8f9c8b070d9bed9809b70ed728a7"} 
+
+cpal = { version = "0.13.1", optional = true }
+fluidlite = {git= "https://github.com/PolyMeilex/fluidlite-rs.git", optional = true}
+fluidlite-lib = {git= "https://github.com/PolyMeilex/fluidlite-rs.git", optional = true}
+
+ron = "0.6.4"
+serde = { version = "1.0.123", features = ["serde_derive"] }
+
+mpeg_encoder = {git="https://github.com/PolyMeilex/mpeg_encoder_next.git", optional=true}
+# mpeg_encoder = {path="../mpeg_encoder_next", optional=true}
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2.7"
+
+[build-dependencies]
+glsl-to-spirv = "0.1.7"
