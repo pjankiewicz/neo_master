@@ -30,6 +30,7 @@ pub struct PlayingScene {
     text_toast: Option<Toast>,
 
     keyboard_on: bool,  //editted for test
+    note_color: usize,
 }
 
 impl PlayingScene {
@@ -48,7 +49,8 @@ impl PlayingScene {
             rectangle_pipeline: RectanglePipeline::new(&target.gpu, &target.transform_uniform),
 
             text_toast: None,
-            keyboard_on: true  //editted for test
+            keyboard_on: true,  //editted for test
+            note_color: 1,
         }
     }
 
@@ -347,6 +349,20 @@ impl Scene for PlayingScene {
                             } else {
                                 self.keyboard_on = true;
                             }
+                        }
+                    }
+                }
+                Some(winit::event::VirtualKeyCode::F1) => {
+                    if let winit::event::ElementState::Released = input.state {
+                        if target.window.state.modifers_state.shift() {
+
+                        } else {
+                            self.notes.recolor(target, self.note_color);
+                            self.note_color += 1;
+                            if self.note_color == self.notes.instance_buffer.len(){
+                                self.note_color = 0;
+                            }
+                            
                         }
                     }
                 }

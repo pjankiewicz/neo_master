@@ -35,8 +35,8 @@ vec3 note_render(vec2 uv, float pos, vec3 color) {
   return color;
 }
 
-#define speed -0.5
-#define liveTime 2.6
+#define speed -0.5  //-0.5
+#define liveTime 2.6  //2.6
 
 void main() {
   vec2 st = uv;
