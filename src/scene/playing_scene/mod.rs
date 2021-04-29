@@ -30,7 +30,6 @@ pub struct PlayingScene {
     text_toast: Option<Toast>,
 
     keyboard_on: bool,  //editted for test
-    note_color: usize,
 }
 
 impl PlayingScene {
@@ -50,7 +49,6 @@ impl PlayingScene {
 
             text_toast: None,
             keyboard_on: true,  //editted for test
-            note_color: 1,
         }
     }
 
@@ -124,7 +122,7 @@ impl Scene for PlayingScene {
         self.notes.resize(target, &self.piano_keyboard.all_keys);
     }
     fn update(&mut self, target: &mut Target) -> SceneEvent {
-        let (window_w, window_h) = {
+        let (window_w, _) = {
             let winit::dpi::LogicalSize { width, height } = target.window.state.logical_size;
             (width, height)
         };
@@ -357,12 +355,7 @@ impl Scene for PlayingScene {
                         if target.window.state.modifers_state.shift() {
 
                         } else {
-                            self.notes.recolor(target, self.note_color);
-                            self.note_color += 1;
-                            if self.note_color == self.notes.instance_buffer.len(){
-                                self.note_color = 0;
-                            }
-                            
+                            self.notes.recolor(target, &self.piano_keyboard.all_keys);
                         }
                     }
                 }
